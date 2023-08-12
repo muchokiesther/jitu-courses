@@ -1,57 +1,36 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace assesment
 {
     public static class dataRetrieve
     {
         static string filePath = "user.txt";
-        public static  void  retrievedata(string filePath)
+        
+        public static List<DTO> retrievedata(string filePath)
         {
+            List<DTO> users = new List<DTO>();
 
-      string[] users = File.ReadAllLines(filePath);
-      foreach (string user in users)
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines)
             {
-                // Split each line into name and password
-                string[] parts = user.Split(',');
+                string[] parts = line.Split(',');
 
                 if (parts.Length == 2)
                 {
                     string name = parts[0];
                     string password = parts[1];
 
-                    // Now you can process the name and password as needed
-                    Console.WriteLine($"Name: {name}, Password: {password}");
+                    users.Add(new DTO { name = name, password = password });
                 }
                 else
                 {
-                    Console.WriteLine($"Invalid line format: {user}");
+                    Console.WriteLine($"Invalid line format: {line}");
                 }
             }
 
+            return users;
         }
-
-
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   

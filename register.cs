@@ -59,7 +59,7 @@ namespace assesment
 
             Console.WriteLine("User registered successfully!");
              SaveUserDataToFile(newUser);
-             login.StartLogin();
+              login.StartLogin();
         }
 
             static void SaveUserDataToFile(DTO user)
