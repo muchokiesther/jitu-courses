@@ -32,8 +32,10 @@ namespace assesment
                     else
                     {
                         Console.WriteLine($"Hi, {name}!");
+                        // AdminActions.ViewCourses();
+                     
                     }
-                    break;
+                  break;
                 }
                 else
                 {
