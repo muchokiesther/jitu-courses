@@ -23,8 +23,17 @@ namespace assesment
 
                 if (IsRegistered(name, password))
                 {
-                    Console.WriteLine($"Hi, {name}!");
-                    break;  // Exit the login loop as the user is registered
+                    if (name.ToLower() == "admin")
+                    {
+                        Console.WriteLine($"Hi, Admin! lets continue");
+                         AdminActions.AdminActionsMenu();
+                             break;
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Hi, {name}!");
+                    }
+                    break;
                 }
                 else
                 {
@@ -33,11 +42,10 @@ namespace assesment
             }
         }
 
-       static bool IsRegistered(string name, string password)
-{
-    List<DTO> users = dataRetrieve.retrievedata(filePath);
-    return users.Any(u => u.name == name && u.password == password);
-}
-
+        static bool IsRegistered(string name, string password)
+        {
+            List<DTO> users = dataRetrieve.retrievedata(filePath);
+            return users.Any(u => u.name == name && u.password == password);
+        }
     }
 }

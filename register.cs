@@ -27,7 +27,7 @@ namespace assesment
                         RegisterUser();
                         break;
                     case 2:
-                      login.StartLogin(); // Call the login page
+                      login.StartLogin(); 
                         return;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
