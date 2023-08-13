@@ -15,7 +15,7 @@ public class AdminActions
             Console.WriteLine("2. Add Course");
             Console.WriteLine("3. Update Course");
             Console.WriteLine("4. Delete Course");
-            Console.WriteLine("5. Logout");
+            Console.WriteLine("5. View Analytics");
 
             int choice = Convert.ToInt32(Console.ReadLine());
 
@@ -35,8 +35,8 @@ public class AdminActions
                     DeleteCourse();
                     break;
                 case 5:
-                    Console.WriteLine("Logged out.");
-                    return;
+                   ViewAnalytics();
+                   break;
                 default:
                     Console.WriteLine("Invalid choice, try again.");
                     break;
@@ -175,7 +175,7 @@ public class AdminActions
             }
         }
     }
-
+ 
 
     public static void DeleteCourse()
     {
@@ -201,5 +201,13 @@ public class AdminActions
             Console.WriteLine("Course not found.");
         }
     }
+
+
+
+     public static void  ViewAnalytics(){
+    
+  }
+
+  
 
 }

@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 
 namespace assesment
 {
@@ -25,17 +23,15 @@ namespace assesment
                 {
                     if (name.ToLower() == "admin")
                     {
-                        Console.WriteLine($"Hi, Admin! lets continue");
-                         AdminActions.AdminActionsMenu();
-                             break;
+                        Console.WriteLine($"Hi, Admin! Let's continue");
+                        AdminActions.AdminActionsMenu();
                     }
                     else
                     {
                         Console.WriteLine($"Hi, {name}!");
-                        // AdminActions.ViewCourses();
-                     
+                        RegularUserActions(name);
                     }
-                  break;
+                    break;
                 }
                 else
                 {
@@ -48,6 +44,54 @@ namespace assesment
         {
             List<DTO> users = dataRetrieve.retrievedata(filePath);
             return users.Any(u => u.name == name && u.password == password);
+        }
+
+        static void RegularUserActions(string name)
+        {
+            while (true)
+            {
+                Console.WriteLine("Select an option:");
+                Console.WriteLine("1. View Courses");
+                Console.WriteLine("2. View Purchased Courses");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        Console.WriteLine("Displaying available courses...");
+                        AdminActions.ViewCourses();
+                        Console.WriteLine("Select a course to purchase:");
+                        string selectedCourse = Console.ReadLine();
+                        Console.WriteLine("Do you want to purchase this course? (yes/no)");
+                        string purchaseChoice = Console.ReadLine();
+                        if (purchaseChoice.ToLower() == "yes")
+                        {
+                            // Perform the course purchase logic here
+                            SavePurchaseInfo(name, selectedCourse); // Save the purchase info
+                            Console.WriteLine("Purchased a course. Thank you!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Course not purchased.");
+                        }
+                        break;
+                    case "2":
+                        Console.WriteLine($"Displaying purchased courses for {name}...");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Please select again.");
+                        break;
+                }
+            }
+        }
+
+        static void SavePurchaseInfo(string username, string courseName)
+        {
+            using (StreamWriter writer = File.AppendText("analytics.txt"))
+            {
+                writer.WriteLine($"User: {username}, Purchased Course: {courseName}, Date: {DateTime.Now}");
+            }
         }
     }
 }
