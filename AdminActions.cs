@@ -204,10 +204,35 @@ public class AdminActions
 
 
 
-     public static void  ViewAnalytics(){
-    
-  }
+  public static void ViewAnalytics()
+{
+    try
+    {
+        string[] analyticsData = File.ReadAllLines("analytics.txt");
 
-  
+        if (analyticsData.Length == 0)
+        {
+            Console.WriteLine("No analytics data available.");
+        }
+        else
+        {
+            Console.WriteLine("Analytics Data:");
+            foreach (string line in analyticsData)
+            {
+                Console.WriteLine(line);
+            }
+        }
+    }
+    catch (FileNotFoundException)
+    {
+        Console.WriteLine("Analytics file not found.");
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("An error occurred.");
+    }
+}
+
+
 
 }
