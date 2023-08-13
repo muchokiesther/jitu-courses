@@ -18,7 +18,7 @@ namespace assesment
             {
                 Console.WriteLine("Select one:");
                 Console.WriteLine("1. Register");
-                Console.WriteLine("2. Exit");
+                Console.WriteLine("2. Login");
                 int choice = Convert.ToInt32(Console.ReadLine());
 
                 switch (choice)
@@ -27,7 +27,7 @@ namespace assesment
                         RegisterUser();
                         break;
                     case 2:
-                        Console.WriteLine("Exited!");
+                      login.StartLogin(); // Call the login page
                         return;
                     default:
                         Console.WriteLine("Invalid choice, try again.");
