@@ -2,3 +2,4 @@
 JavaScript Full-Stack Development,Bring js into development! APPLY,40000
 QA/QE,Do you wanna create quality products?,20000
 WordPress Full Stack development,APPLY NOW,30000
+test course,testingg,10

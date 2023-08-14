@@ -1,5 +1,7 @@
 using System;
 using System.IO;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace assesment
 {
@@ -63,29 +65,57 @@ namespace assesment
                         AdminActions.ViewCourses();
                         Console.WriteLine("Select a course to purchase:");
                         string selectedCourse = Console.ReadLine();
+                        decimal coursePrice = 50000.0m; // Simulated course price
+
+                        Console.WriteLine($"Course: {selectedCourse}");
+                        Console.WriteLine($"Course Price: {coursePrice}");
                         Console.WriteLine("Do you want to purchase this course? (yes/no)");
                         string purchaseChoice = Console.ReadLine();
+
                         if (purchaseChoice.ToLower() == "yes")
                         {
+                            decimal userBalance = GetUserBalance(name);
 
-                            SavePurchaseInfo(name, selectedCourse);
-                            Console.WriteLine("Purchased a course. Thank you!");
+                            if (userBalance >= coursePrice)
+                            {
+                                SavePurchaseInfo(name, selectedCourse);
+                                UpdateUserBalance(name, -coursePrice);
+                                Console.WriteLine("Purchased a course. Thank you!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Insufficient funds. Do you want to top up? (yes/no)");
+                                string topUpChoice = Console.ReadLine();
+                                if (topUpChoice.ToLower() == "yes")
+                                {
+                                    // Implement logic to simulate topping up
+                                    Console.WriteLine("Topped up successfully.");
+                                    UpdateUserBalance(name, 50000.0m); // Simulated top-up
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Course not purchased.");
+                                }
+                            }
                         }
                         else
                         {
                             Console.WriteLine("Course not purchased.");
                         }
                         break;
+
                     case "2":
                         Console.WriteLine($"Displaying purchased courses for {name}...");
                         DisplayPurchasedCourses(name);
                         break;
+
                     default:
                         Console.WriteLine("Invalid choice. Please select again.");
                         break;
                 }
             }
         }
+
         static void DisplayPurchasedCourses(string username)
         {
             string[] allPurchases = File.ReadAllLines("analytics.txt");
@@ -119,12 +149,26 @@ namespace assesment
 
             return "";
         }
+
         static void SavePurchaseInfo(string username, string courseName)
         {
             using (StreamWriter writer = File.AppendText("analytics.txt"))
             {
                 writer.WriteLine($"User: {username}, Purchased Course: {courseName}, Date: {DateTime.Now}");
             }
+        }
+
+
+// FIGURE OUT HOW TO IMPLEMNET SUCH INSTANCES!
+        static decimal GetUserBalance(string username)
+        {
+          
+            return 200.0m; 
+        }
+
+        static void UpdateUserBalance(string username, decimal newBalance)
+        {
+           
         }
     }
 }
