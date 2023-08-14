@@ -65,7 +65,7 @@ namespace assesment
                         AdminActions.ViewCourses();
                         Console.WriteLine("Select a course to purchase:");
                         string selectedCourse = Console.ReadLine();
-                        decimal coursePrice = 50000.0m; // Simulated course price
+                        decimal coursePrice = 50000.0m; 
 
                         Console.WriteLine($"Course: {selectedCourse}");
                         Console.WriteLine($"Course Price: {coursePrice}");
@@ -88,9 +88,9 @@ namespace assesment
                                 string topUpChoice = Console.ReadLine();
                                 if (topUpChoice.ToLower() == "yes")
                                 {
-                                    // Implement logic to simulate topping up
+                                    
                                     Console.WriteLine("Topped up successfully.");
-                                    UpdateUserBalance(name, 50000.0m); // Simulated top-up
+                                    UpdateUserBalance(name, 50000.0m); 
                                 }
                                 else
                                 {
