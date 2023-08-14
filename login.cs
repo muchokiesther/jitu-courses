@@ -67,8 +67,8 @@ namespace assesment
                         string purchaseChoice = Console.ReadLine();
                         if (purchaseChoice.ToLower() == "yes")
                         {
-                            // Perform the course purchase logic here
-                            SavePurchaseInfo(name, selectedCourse); // Save the purchase info
+
+                            SavePurchaseInfo(name, selectedCourse);
                             Console.WriteLine("Purchased a course. Thank you!");
                         }
                         else
@@ -78,6 +78,7 @@ namespace assesment
                         break;
                     case "2":
                         Console.WriteLine($"Displaying purchased courses for {name}...");
+                        DisplayPurchasedCourses(name);
                         break;
                     default:
                         Console.WriteLine("Invalid choice. Please select again.");
@@ -85,7 +86,39 @@ namespace assesment
                 }
             }
         }
+        static void DisplayPurchasedCourses(string username)
+        {
+            string[] allPurchases = File.ReadAllLines("analytics.txt");
+            bool foundPurchases = false;
 
+            foreach (string purchase in allPurchases)
+            {
+                if (purchase.Contains($"User: {username}, Purchased Course:"))
+                {
+                    string purchasedCourse = GetPurchasedCourseName(purchase);
+                    Console.WriteLine($"Purchased Course: {purchasedCourse}");
+                    foundPurchases = true;
+                }
+            }
+
+            if (!foundPurchases)
+            {
+                Console.WriteLine("You haven't purchased any courses yet.");
+            }
+        }
+
+        static string GetPurchasedCourseName(string purchase)
+        {
+            int startIndex = purchase.IndexOf("Purchased Course:") + "Purchased Course:".Length;
+            int endIndex = purchase.IndexOf(",", startIndex);
+
+            if (startIndex >= 0 && endIndex >= 0)
+            {
+                return purchase.Substring(startIndex, endIndex - startIndex).Trim();
+            }
+
+            return "";
+        }
         static void SavePurchaseInfo(string username, string courseName)
         {
             using (StreamWriter writer = File.AppendText("analytics.txt"))
