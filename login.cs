@@ -9,7 +9,7 @@ namespace assesment
 
         public static void StartLogin()
         {
-            Console.WriteLine("Welcome Back");
+            Console.WriteLine("Welcome Back!!");
 
             while (true)
             {
@@ -80,8 +80,8 @@ namespace assesment
                                 string purchaseChoice = Console.ReadLine();
                                 if (purchaseChoice.ToLower() == "yes")
                                 {
-                                    // Performed the course purchase logic here
-                                    SavePurchaseInfo(name, selectedCourse); // Saving the purchase info
+                                   
+                                    SavePurchaseInfo(name, selectedCourse); 
                                     Console.WriteLine("Purchased a course. Thank you!");
                                 }
                                 else
@@ -100,8 +100,8 @@ namespace assesment
                             string purchaseChoice = Console.ReadLine();
                             if (purchaseChoice.ToLower() == "yes")
                             {
-                                // Perform the course purchase logic here
-                                SavePurchaseInfo(name, selectedCourse); // Save the purchase info
+                    
+                                SavePurchaseInfo(name, selectedCourse); 
                                 Console.WriteLine("Purchased a course. Thank you!");
                             }
                             else
