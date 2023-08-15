@@ -35,8 +35,8 @@ public class AdminActions
                     DeleteCourse();
                     break;
                 case 5:
-                   ViewAnalytics();
-                   break;
+                    ViewAnalytics();
+                    break;
                 default:
                     Console.WriteLine("Invalid choice, try again.");
                     break;
@@ -102,7 +102,7 @@ public class AdminActions
 
     public static void UpdateCourse()
     {
-  
+
         List<CourseDTO> courses = ReadCoursesFromFile();
 
         Console.WriteLine("Enter the name of the course to update:");
@@ -122,12 +122,12 @@ public class AdminActions
             Console.WriteLine("Enter the new course price:");
             decimal newPrice = Convert.ToDecimal(Console.ReadLine());
 
-      
+
             courseToUpdate.Name = newName;
             courseToUpdate.Description = newDescription;
             courseToUpdate.Price = newPrice;
 
-         
+
             SaveCoursesToFile(courses);
 
             Console.WriteLine("Course updated successfully!");
@@ -175,7 +175,7 @@ public class AdminActions
             }
         }
     }
- 
+
 
     public static void DeleteCourse()
     {
@@ -204,34 +204,34 @@ public class AdminActions
 
 
 
-  public static void ViewAnalytics()
-{
-    try
+    public static void ViewAnalytics()
     {
-        string[] analyticsData = File.ReadAllLines("analytics.txt");
+        try
+        {
+            string[] analyticsData = File.ReadAllLines("analytics.txt");
 
-        if (analyticsData.Length == 0)
-        {
-            Console.WriteLine("No analytics data available.");
-        }
-        else
-        {
-            Console.WriteLine("Analytics Data:");
-            foreach (string line in analyticsData)
+            if (analyticsData.Length == 0)
             {
-                Console.WriteLine(line);
+                Console.WriteLine("No analytics data available.");
+            }
+            else
+            {
+                Console.WriteLine("Analytics Data:");
+                foreach (string line in analyticsData)
+                {
+                    Console.WriteLine(line);
+                }
             }
         }
+        catch (FileNotFoundException)
+        {
+            Console.WriteLine("Analytics file not found.");
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("An error occurred.");
+        }
     }
-    catch (FileNotFoundException)
-    {
-        Console.WriteLine("Analytics file not found.");
-    }
-    catch (Exception)
-    {
-        Console.WriteLine("An error occurred.");
-    }
-}
 
 
 

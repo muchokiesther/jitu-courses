@@ -1,7 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace assesment
 {
@@ -48,6 +46,8 @@ namespace assesment
             return users.Any(u => u.name == name && u.password == password);
         }
 
+
+
         static void RegularUserActions(string name)
         {
             while (true)
@@ -65,50 +65,54 @@ namespace assesment
                         AdminActions.ViewCourses();
                         Console.WriteLine("Select a course to purchase:");
                         string selectedCourse = Console.ReadLine();
-                        decimal coursePrice = 50000.0m; 
 
-                        Console.WriteLine($"Course: {selectedCourse}");
-                        Console.WriteLine($"Course Price: {coursePrice}");
-                        Console.WriteLine("Do you want to purchase this course? (yes/no)");
-                        string purchaseChoice = Console.ReadLine();
 
-                        if (purchaseChoice.ToLower() == "yes")
+                        if (selectedCourse.Contains("C# Full Stack Development"))
                         {
-                            decimal userBalance = GetUserBalance(name);
-
-                            if (userBalance >= coursePrice)
+                            Console.WriteLine("This course requires a top-up before purchase.");
+                            Console.WriteLine("Please enter the amount to top up:");
+                            string topUpAmountStr = Console.ReadLine();
+                            if (int.TryParse(topUpAmountStr, out int topUpAmount))
                             {
-                                SavePurchaseInfo(name, selectedCourse);
-                                UpdateUserBalance(name, -coursePrice);
-                                Console.WriteLine("Purchased a course. Thank you!");
-                            }
-                            else
-                            {
-                                Console.WriteLine("Insufficient funds. Do you want to top up? (yes/no)");
-                                string topUpChoice = Console.ReadLine();
-                                if (topUpChoice.ToLower() == "yes")
+                                //how to top up 
+                                Console.WriteLine("Top-up successful! You can now proceed with the purchase.");
+                                Console.WriteLine("Do you want to purchase this course? (yes/no)");
+                                string purchaseChoice = Console.ReadLine();
+                                if (purchaseChoice.ToLower() == "yes")
                                 {
-                                    
-                                    Console.WriteLine("Topped up successfully.");
-                                    UpdateUserBalance(name, 50000.0m); 
+                                    // Performed the course purchase logic here
+                                    SavePurchaseInfo(name, selectedCourse); // Saving the purchase info
+                                    Console.WriteLine("Purchased a course. Thank you!");
                                 }
                                 else
                                 {
                                     Console.WriteLine("Course not purchased.");
                                 }
                             }
+                            else
+                            {
+                                Console.WriteLine("Invalid top-up amount.");
+                            }
                         }
                         else
                         {
-                            Console.WriteLine("Course not purchased.");
+                            Console.WriteLine("Do you want to purchase this course? (yes/no)");
+                            string purchaseChoice = Console.ReadLine();
+                            if (purchaseChoice.ToLower() == "yes")
+                            {
+                                // Perform the course purchase logic here
+                                SavePurchaseInfo(name, selectedCourse); // Save the purchase info
+                                Console.WriteLine("Purchased a course. Thank you!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Course not purchased.");
+                            }
                         }
                         break;
-
                     case "2":
                         Console.WriteLine($"Displaying purchased courses for {name}...");
-                        DisplayPurchasedCourses(name);
                         break;
-
                     default:
                         Console.WriteLine("Invalid choice. Please select again.");
                         break;
@@ -116,39 +120,6 @@ namespace assesment
             }
         }
 
-        static void DisplayPurchasedCourses(string username)
-        {
-            string[] allPurchases = File.ReadAllLines("analytics.txt");
-            bool foundPurchases = false;
-
-            foreach (string purchase in allPurchases)
-            {
-                if (purchase.Contains($"User: {username}, Purchased Course:"))
-                {
-                    string purchasedCourse = GetPurchasedCourseName(purchase);
-                    Console.WriteLine($"Purchased Course: {purchasedCourse}");
-                    foundPurchases = true;
-                }
-            }
-
-            if (!foundPurchases)
-            {
-                Console.WriteLine("You haven't purchased any courses yet.");
-            }
-        }
-
-        static string GetPurchasedCourseName(string purchase)
-        {
-            int startIndex = purchase.IndexOf("Purchased Course:") + "Purchased Course:".Length;
-            int endIndex = purchase.IndexOf(",", startIndex);
-
-            if (startIndex >= 0 && endIndex >= 0)
-            {
-                return purchase.Substring(startIndex, endIndex - startIndex).Trim();
-            }
-
-            return "";
-        }
 
         static void SavePurchaseInfo(string username, string courseName)
         {
@@ -156,19 +127,6 @@ namespace assesment
             {
                 writer.WriteLine($"User: {username}, Purchased Course: {courseName}, Date: {DateTime.Now}");
             }
-        }
-
-
-// FIGURE OUT HOW TO IMPLEMNET SUCH INSTANCES!
-        static decimal GetUserBalance(string username)
-        {
-          
-            return 200.0m; 
-        }
-
-        static void UpdateUserBalance(string username, decimal newBalance)
-        {
-           
         }
     }
 }

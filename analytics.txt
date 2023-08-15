@@ -1,2 +1,5 @@
 User: erty, Purchased Course: WordPress Full Stack development, Date: 8/13/2023 11:40:23 PM
 User: Muyu, Purchased Course: QA/QE, Date: 8/14/2023 4:19:22 PM
+User: rt, Purchased Course: QA/QE, Date: 8/15/2023 4:59:10 PM
+User: we, Purchased Course: JavaScript Full-Stack Development, Date: 8/15/2023 7:35:54 PM
+User: we, Purchased Course:  C# Full Stack Development, Date: 8/15/2023 7:36:16 PM
