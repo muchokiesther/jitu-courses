@@ -184,7 +184,7 @@ public class AdminActions
         Console.WriteLine("Enter the name of the course to delete:");
         string courseNameToDelete = Console.ReadLine();
 
-        // Finding the course to delete
+      
         CourseDTO courseToDelete = courses.FirstOrDefault(course => course.Name == courseNameToDelete);
 
         if (courseToDelete != null)
